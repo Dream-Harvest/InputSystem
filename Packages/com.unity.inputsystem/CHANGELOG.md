@@ -13,6 +13,8 @@ however, it has to be formatted properly to pass verification tests.
 
 - Delete key not working in the input actions editor ([case 1282090](https://issuetracker.unity3d.com/issues/input-system-delete-key-doesnt-work-in-the-input-actions-window)).
 
+- Runtime rebinds are leaking into .inputactions asset ([case 1190502](https://issuetracker.unity3d.com/issues/inputsystem-runtime-rebinds-are-leaking-into-inputactions-asset))
+
 ## [1.1.0-preview.3] - 2021-02-04
 
 ### Changed

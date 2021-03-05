@@ -70,6 +70,7 @@ namespace UnityEngine.InputSystem
                     $"An action map called '{map.name}' already exists in the asset");
 
             ArrayHelpers.Append(ref asset.m_ActionMaps, map);
+            asset.MarkAsDirty();
             map.m_Asset = asset;
         }
 
@@ -98,6 +99,7 @@ namespace UnityEngine.InputSystem
                 return;
 
             ArrayHelpers.Erase(ref asset.m_ActionMaps, map);
+            asset.MarkAsDirty();
             map.m_Asset = null;
         }
 
@@ -190,6 +192,9 @@ namespace UnityEngine.InputSystem
                 action.m_Processors = processors;
             }
 
+            if(map.asset != null)
+                map.asset.MarkAsDirty();
+
             map.ClearPerActionCachedBindingData();
             map.LazyResolveBindings();
 
@@ -231,6 +236,9 @@ namespace UnityEngine.InputSystem
 
             action.m_ActionMap = null;
             action.m_SingletonActionBindings = bindingsForAction;
+
+            if (actionMap.asset != null)
+                actionMap.asset.MarkAsDirty();
 
             actionMap.ClearPerActionCachedBindingData();
 
@@ -811,6 +819,9 @@ namespace UnityEngine.InputSystem
             var oldName = action.m_Name;
             action.m_Name = newName;
 
+            if (actionMap.asset != null)
+                actionMap.asset.MarkAsDirty();
+
             // Update bindings.
             var bindings = action.GetOrCreateActionMap().m_Bindings;
             var bindingCount = bindings.LengthSafe();
@@ -908,6 +919,8 @@ namespace UnityEngine.InputSystem
             var index = asset.FindControlSchemeIndex(name);
             if (index != -1)
                 ArrayHelpers.EraseAt(ref asset.m_ControlSchemes, index);
+
+            asset.MarkAsDirty();
         }
 
         public static InputControlScheme WithBindingGroup(this InputControlScheme scheme, string bindingGroup)

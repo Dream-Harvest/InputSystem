@@ -15,6 +15,7 @@ however, it has to be formatted properly to pass verification tests.
   * This used to trigger an `Assert` at runtime but now properly throws an `InvalidOperationException`.
 - The `VirtualMouseInput` component is now part of the Input System assembly. It was previously packaged with the `Gamepad Mouse Cursor` sample.
   * The component has a different GUID from before, so existing setups that use the component from the sample are not broken. To use the built-in component you must explicitly switch over.
+- Generic `Gamepad` now has platform independent button names. Previously it used different names if editor targeted PS4/Switch consoles (case 1321676).
 
 ### Fixed
 
